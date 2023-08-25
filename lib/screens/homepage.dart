@@ -13,14 +13,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Theme(
-        data: ThemeData(),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, 'add_to_contact');
-          },
-          child: Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, 'add_to_contact');
+        },
+        child: Icon(Icons.add),
       ),
       appBar: AppBar(
         title: AnimatedTextKit(

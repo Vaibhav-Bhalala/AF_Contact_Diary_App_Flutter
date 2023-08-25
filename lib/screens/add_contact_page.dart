@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Add_Contact_Page extends StatefulWidget {
   const Add_Contact_Page({super.key});
@@ -9,6 +12,10 @@ class Add_Contact_Page extends StatefulWidget {
 }
 
 class _Add_Contact_PageState extends State<Add_Contact_Page> {
+  XFile? image;
+  String? imagepath;
+  ImagePicker picker = ImagePicker();
+
   int initalindexed = 0;
   GlobalKey<FormState> Formkey = GlobalKey();
   @override
@@ -52,9 +59,35 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                     : StepState.indexed,
                 isActive: (initalindexed == 0) ? true : false,
                 title: Text("Add Image"),
-                content: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 50,
+                content: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      radius: 50,
+                      foregroundImage: FileImage(File("${image?.path}")),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            image = await picker.pickImage(
+                                source: ImageSource.camera);
+                            setState(() {});
+                          },
+                          icon: Icon(Icons.camera_alt_outlined),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            image = await picker.pickImage(
+                                source: ImageSource.gallery);
+                            setState(() {});
+                          },
+                          icon: Icon(Icons.photo),
+                        )
+                      ],
+                    )
+                  ],
                 )),
             Step(
                 state: (initalindexed == 1)
