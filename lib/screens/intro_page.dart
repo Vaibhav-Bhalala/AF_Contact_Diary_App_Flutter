@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -20,12 +21,14 @@ class _Intro_ScreenState extends State<Intro_Screen> {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-              titleWidget: Text(
-                "Contact Diary",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple),
+              titleWidget: AnimatedTextKit(
+                animatedTexts: [
+                  FlickerAnimatedText("Contact Diary ",
+                      textStyle: TextStyle(
+                          color: Colors.purple,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25))
+                ],
               ),
               bodyWidget: Column(
                 children: [
@@ -41,49 +44,53 @@ class _Intro_ScreenState extends State<Intro_Screen> {
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText("Welcomes You ",
+                          textStyle: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25))
+                    ],
                   )
                 ],
               )),
           PageViewModel(
               titleWidget: Text(
-                "Contact Diary",
+                "",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.purple),
               ),
               bodyWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: h * 0.60,
+                    height: h * 0.55,
                     width: w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(
-                                "https://cdn.dribbble.com/users/623022/screenshots/3794948/___.gif"),
+                            image: NetworkImage("https://i.gifer.com/96Be.gif"),
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText("Make Your Own  Diary",
+                          textStyle: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25))
+                    ],
                   )
                 ],
               )),
           PageViewModel(
               titleWidget: Text(
-                "Contact Diary",
+                "",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -97,18 +104,21 @@ class _Intro_ScreenState extends State<Intro_Screen> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://cdn.dribbble.com/users/623022/screenshots/3794948/___.gif"),
+                                "https://dtlive.s3.ap-south-1.amazonaws.com/16387/DT_G70_Digital-marketing-Animated-GIF-Icon-pack.gif"),
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                          "Easy Way to Manages Your Contacts",
+                          textStyle: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25))
+                    ],
                   )
                 ],
               )),
@@ -178,7 +188,7 @@ class _Intro_ScreenState extends State<Intro_Screen> {
         showNextButton: false,
         done: const Text("Start"),
         onDone: () {
-          // On button pressed
+          Navigator.pushReplacementNamed(context, 'home');
         },
       ),
     );

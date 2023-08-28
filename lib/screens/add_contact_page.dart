@@ -12,6 +12,16 @@ class Add_Contact_Page extends StatefulWidget {
 }
 
 class _Add_Contact_PageState extends State<Add_Contact_Page> {
+  String firstname = "";
+  String lastname = "";
+  String mobile = "";
+  String email = "";
+
+  TextEditingController fistname_controller = TextEditingController();
+  TextEditingController lastname_controller = TextEditingController();
+  TextEditingController mobile_controller = TextEditingController();
+  TextEditingController email_controller = TextEditingController();
+
   XFile? image;
   String? imagepath;
   ImagePicker picker = ImagePicker();
@@ -31,7 +41,20 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
             )
           ],
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.check))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                if (Formkey.currentState!.validate()) {
+                  Formkey.currentState!.save();
+
+                  fistname_controller.clear();
+                  lastname_controller.clear();
+                  mobile_controller.clear();
+                  email_controller.clear();
+                }
+              },
+              icon: Icon(Icons.check))
+        ],
         centerTitle: true,
       ),
       body: Form(
@@ -62,6 +85,7 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                 content: Column(
                   children: [
                     CircleAvatar(
+                      child: Text("Add Photo"),
                       backgroundColor: Colors.grey,
                       radius: 50,
                       foregroundImage: FileImage(File("${image?.path}")),
@@ -96,6 +120,13 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                 isActive: (initalindexed == 1) ? true : false,
                 title: Text("First Name"),
                 content: TextFormField(
+                  controller: fistname_controller,
+                  validator: (val) {
+                    return "Enter Valid First Name";
+                  },
+                  onSaved: (val) {
+                    firstname = val!;
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -110,6 +141,13 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                 isActive: (initalindexed == 2) ? true : false,
                 title: Text("Last Name"),
                 content: TextFormField(
+                  controller: lastname_controller,
+                  validator: (val) {
+                    return "Enter Valid Last Name";
+                  },
+                  onSaved: (val) {
+                    lastname = val!;
+                  },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -124,6 +162,13 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                 isActive: (initalindexed == 3) ? true : false,
                 title: Text("Phone Number"),
                 content: TextFormField(
+                  controller: mobile_controller,
+                  validator: (val) {
+                    return "Enter Valid Mobile Number";
+                  },
+                  onSaved: (val) {
+                    mobile = val!;
+                  },
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -139,6 +184,13 @@ class _Add_Contact_PageState extends State<Add_Contact_Page> {
                 isActive: (initalindexed == 4) ? true : false,
                 title: Text("E-mail"),
                 content: TextFormField(
+                  controller: email_controller,
+                  validator: (val) {
+                    return "Enter Valid E-Mail Address";
+                  },
+                  onSaved: (val) {
+                    email = val!;
+                  },
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(

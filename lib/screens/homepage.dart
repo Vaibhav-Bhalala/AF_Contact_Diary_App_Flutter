@@ -13,11 +13,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushNamed(context, 'add_to_contact');
         },
-        child: Icon(Icons.add),
+        label: Text("Add Contact"),
+        icon: Icon(Icons.add),
       ),
       appBar: AppBar(
         title: AnimatedTextKit(
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           child: AnimatedTextKit(
         repeatForever: true,
         animatedTexts: [
-          TypewriterAnimatedText("You have no Contacts yet ",
+          WavyAnimatedText("You have no Contacts yet ",
               textStyle: GoogleFonts.getFont("Nunito")
                   .copyWith(fontSize: 30, color: Colors.grey)),
         ],
