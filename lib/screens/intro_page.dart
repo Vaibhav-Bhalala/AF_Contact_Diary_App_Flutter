@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Intro_Screen extends StatefulWidget {
   const Intro_Screen({super.key});
@@ -67,7 +68,7 @@ class _Intro_ScreenState extends State<Intro_Screen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: h * 0.55,
+                    height: h * 0.60,
                     width: w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -124,7 +125,7 @@ class _Intro_ScreenState extends State<Intro_Screen> {
               )),
           PageViewModel(
               titleWidget: Text(
-                "Contact Diary",
+                "",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -138,24 +139,26 @@ class _Intro_ScreenState extends State<Intro_Screen> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://cdn.dribbble.com/users/623022/screenshots/3794948/___.gif"),
+                                "https://i.pinimg.com/originals/95/54/55/95545586b437892bff2dd2174e8e088e.gif"),
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  )
+                  AnimatedTextKit(animatedTexts: [
+                    TypewriterAnimatedText(
+                      "Sync Your Contacts Easily",
+                      textStyle: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple),
+                    )
+                  ]),
                 ],
               )),
           PageViewModel(
               titleWidget: Text(
-                "Contact Diary",
+                "",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -169,26 +172,30 @@ class _Intro_ScreenState extends State<Intro_Screen> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                                "https://cdn.dribbble.com/users/623022/screenshots/3794948/___.gif"),
+                                "https://mir-s3-cdn-cf.behance.net/project_modules/disp/bbd43646252567.584db791c363c.gif"),
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
                     height: 25,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  )
+                  AnimatedTextKit(animatedTexts: [
+                    TypewriterAnimatedText(
+                      "Let's gets Started",
+                      textStyle: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple),
+                    )
+                  ]),
                 ],
               )),
         ],
         showNextButton: false,
         done: const Text("Start"),
-        onDone: () {
+        onDone: () async {
           Navigator.pushReplacementNamed(context, 'home');
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          preferences.setBool("visited", true);
         },
       ),
     );

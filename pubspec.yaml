@@ -39,6 +39,7 @@ dependencies:
   google_fonts:
   image_picker:
   introduction_screen: ^3.1.11
+  shared_preferences:
 dev_dependencies:
   flutter_test:
     sdk: flutter
